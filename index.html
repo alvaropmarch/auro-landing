@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auro AI - Ahorra en tus facturas con Inteligencia Artificial</title>
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* --- Estilos Base --- */
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background-color: #FFFFFF; 
+            color: #1A1A1A;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .no-scroll {
+            overflow: hidden;
+        }
+
+        /* --- Contenedores y Layout --- */
+        .simple-container {
+            display: flex;
+            box-sizing: border-box;
+        }
+        .direction-column { flex-direction: column; }
+        .direction-row { flex-direction: row; }
+        .align-center { align-items: center; }
+        .justify-center { justify-content: center; }
+        .width-100 { width: 100%; }
+        .max-width-600 { max-width: 600px; }
+        .max-width-1200 { max-width: 1200px; }
+        .gap-8 { gap: 8px; }
+        .gap-16 { gap: 16px; }
+        .gap-24 { gap: 24px; }
+        .gap-32 { gap: 32px; }
+        .margin-0 { margin: 0; }
+        .top-margin-16 { margin-top: 16px; }
+        .top-margin-32 { margin-top: 32px; }
+        .top-margin-48 { margin-top: 48px; }
+        .top-margin-64 { margin-top: 64px; }
+        .bottom-margin-16 { margin-bottom: 16px; }
+        .bottom-margin-32 { margin-bottom: 32px; }
+        .bottom-margin-64 { margin-bottom: 64px; }
+        .flex-wrap { flex-wrap: wrap; }
+        .grow-1 { flex-grow: 1; }
+        .basis-normal { flex-basis: 0; }
+        .position-relative { position: relative; }
+        .z-index-1 { z-index: 1; }
+        .padding-24 { padding: 24px; }
+        .h-padding-16 { padding-left: 16px; padding-right: 16px; }
+        
+        /* --- Tipografía --- */
+        .main-title {
+            font-size: 52px;
+            font-weight: 600;
+            line-height: 1.2;
+            text-wrap: pretty;
+            color: #1A1A1A;
+        }
+        .title-text {
+            font-size: 20px;
+            font-weight: 300;
+            color: #666666;
+        }
+        .outline-text {
+            color: #666666;
+        }
+        .text-center { text-align: center; }
+        
+        /* --- Componentes --- */
+        .pildora {
+            display: inline-flex;
+            align-items: center;
+            background-color: #F0F0F0;
+            color: #333333;
+            border-radius: 9999px;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 8px 16px;
+        }
+
+        .style-4 { /* Estilo base para botones */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border: none;
+            border-radius: 9999px;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            text-decoration: none;
+        }
+        .style-4:hover {
+            transform: scale(1.05);
+        }
+        .primary-container {
+            background: linear-gradient(to right, #147FFD, #A491FB);
+            color: #FFFFFF;
+        }
+        .outline-1 {
+            border: 1px solid #BBBBBB;
+            background-color: transparent;
+            color: #1A1A1A;
+        }
+        .on-primary-container-text { color: #FFFFFF; }
+        .on-background-text { color: #1A1A1A; }
+        .background { background-color: #FFFFFF; }
+        md-icon, .material-icons { font-family: 'Material Icons'; }
+
+        /* Auro AI Logo */
+        .auro-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 28px;
+            font-weight: 700;
+            color: #1A1A1A;
+            text-decoration: none;
+        }
+        .auro-logo-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            font-size: 20px;
+            color: #FFFFFF;
+            font-weight: bold;
+        }
+
+        /* --- Floating Header --- */
+        .floating-header {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 48px);
+            max-width: 1200px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 10px 10px 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 9999px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-sizing: border-box;
+            border: 1px solid #EEEEEE;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .header-nav {
+            display: flex;
+            gap: 8px;
+        }
+        .header-nav a {
+            text-decoration: none;
+            color: #333333;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 9999px;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+        .header-nav a:hover {
+            background-color: #F0F0F0;
+        }
+
+        .floating-header .auro-logo {
+            font-size: 24px;
+        }
+        .floating-header .auro-logo-icon {
+            width: 32px;
+            height: 32px;
+            font-size: 18px;
+        }
+        .floating-header .style-4 {
+            padding: 8px 18px;
+            font-size: 15px;
+        }
+        
+        .hamburger-menu {
+            display: none; /* Oculto en desktop */
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #FFFFFF;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            transform: translateY(-100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        .mobile-nav.is-open {
+            transform: translateY(0);
+        }
+        .mobile-nav a {
+            text-decoration: none;
+            color: #1A1A1A;
+            font-size: 28px;
+            font-weight: 600;
+        }
+        .mobile-nav .close-menu {
+            position: absolute;
+            top: 30px;
+            right: 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+
+        /* --- Hero Section --- */
+        #section-index {
+            padding: 0 24px;
+            overflow-x: hidden;
+        }
+        .row-1 {
+            margin-top: 180px;
+        }
+        .hero-image-container {
+            border-radius: 24px;
+            background-color: #F8F8F8;
+            padding: 24px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid #EEEEEE;
+        }
+        .hero-image {
+            width: 100%;
+            border-radius: 16px;
+            background-color: #E0E0E0;
+        }
+
+        /* --- Cómo Funciona Section --- */
+        .valores-grid {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            width: 100%;
+        }
+        .grid-card {
+            background-color: #F8F8F8;
+            border-radius: 24px;
+            padding: 32px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            text-align: center;
+            max-width: 380px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid #EEEEEE;
+        }
+        .grid-card md-icon {
+            background: linear-gradient(to right, #147FFD, #A491FB);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: #000000;
+            font-size: 48px;
+        }
+        .large-icon { font-size: 36px; }
+
+        /* --- Features Section (Tabs) --- */
+        .menu-pill-container {
+            background-color: #F0F0F0;
+            border-radius: 9999px;
+            padding: 4px;
+            display: flex;
+            overflow-x: auto;
+            gap: 8px;
+        }
+        .tab-button-pill {
+            border-radius: 9999px !important;
+            padding: 12px 24px !important;
+            background-color: transparent !important;
+            color: #333333 !important;
+            transition: background-color 0.2s ease, color 0.2s ease;
+            text-wrap: nowrap;
+            flex-shrink: 0;
+        }
+        .tab-button-pill.active {
+            background: linear-gradient(to right, #147FFD, #A491FB) !important;
+            color: #FFFFFF !important;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: flex;
+        }
+        .feature-content-container {
+            display: flex;
+            flex-direction: row;
+            gap: 32px;
+            align-items: center;
+            background-color: #F8F8F8;
+            border-radius: 24px;
+            padding: 48px;
+            box-sizing: border-box;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid #EEEEEE;
+        }
+        .feature-content-left, .feature-content-right {
+            flex: 1;
+        }
+        .feature-content-right {
+            text-align: left;
+        }
+        .feature-image {
+            width: 100%;
+            border-radius: 16px;
+            background-color: #E0E0E0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+        .headline-medium {
+            font-size: 28px;
+            font-weight: 500;
+            color: #1A1A1A;
+        }
+        
+        /* --- Gratis CTA Section --- */
+        .cta-section {
+            background: linear-gradient(to right, #147FFD, #A491FB);
+            border-radius: 24px;
+            padding: 64px 32px;
+            color: #FFFFFF;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+        .cta-section .main-title, .cta-section .title-text {
+            color: #FFFFFF;
+        }
+        .cta-section .style-4 {
+            background-color: #FFFFFF;
+        }
+        .cta-section .style-4:hover {
+            background-color: #EEEEEE;
+        }
+
+        /* --- Footer --- */
+        .footer-section {
+            background-color: #F8F8F8;
+            color: #333333;
+            border-top: 1px solid #EEEEEE;
+        }
+        .footer-section .headline-medium {
+            color: #1A1A1A;
+        }
+        .footer-section .outline-text {
+            color: #666666;
+        }
+        .footer-section .style-4 {
+            color: #333333;
+        }
+        .footer-section .style-4 md-icon {
+             background: linear-gradient(to right, #147FFD, #A491FB);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: #000000;
+        }
+        .footer-section .border-top-light {
+            border-top: 1px solid #EEEEEE;
+        }
+
+        .boton-footer {
+            margin-top: 3px;
+            margin-bottom: px;
+        }
+        
+        /* --- WhatsApp FAB --- */
+        .whatsapp-fab {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 24px;
+            right: 24px;
+            background: linear-gradient(to right, #147FFD, #A491FB);
+            color: #FFF;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 6px rgba(0,0,0,0.25);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(20, 127, 253, 0.7);
+            }
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 10px rgba(20, 127, 253, 0);
+            }
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(20, 127, 253, 0);
+            }
+        }
+        
+        .tab-icon { display: none; }
+        .tab-text { display: inline; }
+
+        /* --- Responsive --- */
+        [only-on-mobile] { display: none; }
+        [hide-on-mobile] { display: flex; }
+
+        @media only screen and (max-width: 900px) {
+            .header-nav, .header-right .style-4 {
+                display: none;
+            }
+            .hamburger-menu {
+                display: flex;
+            }
+        }
+
+        @media only screen and (max-width: 768px) {
+            .row-1 { margin-top: 150px; }
+            .main-title { font-size: 40px !important; }
+            .valores-grid { flex-direction: column; }
+            .feature-content-container { flex-direction: column-reverse; padding: 24px; }
+            [only-on-mobile] { display: flex; }
+            [hide-on-mobile] { display: none; }
+            .hero-image-container { padding: 16px; }
+            .grid-card { padding: 24px; }
+            .feature-content-container { padding: 24px; }
+            .cta-section { padding: 48px 24px; }
+
+            .menu-pill-container {
+                justify-content: center;
+            }
+            .tab-button-pill {
+                padding: 12px !important;
+            }
+            .tab-icon { display: inline-block; }
+            .tab-text { display: none; }
+
+            .floating-header {
+                padding: 8px 8px 8px 15px;
+                width: calc(100% - 32px);
+            }
+            .floating-header .auro-logo {
+                font-size: 20px;
+            }
+            .floating-header .auro-logo-icon {
+                width: 28px;
+                height: 28px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    
+<header class="floating-header">
+    <a href="#section-index" class="auro-logo">
+        <img class="auro-logo-icon" src="logo.svg" alt="Logo de Auro AI"> Auro AI
+    </a>
+    <nav class="header-nav">
+        <a href="#como-funciona">Cómo funciona</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#contacto">Contacto</a>
+    </nav>
+    <div class="header-right">
+        <a href="https://api.whatsapp.com/send?phone=34694256528&text=%2Fstart" class="style-4 primary-container on-primary-container-text">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width='1em' height='1em'><path fill="currentColor" d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91c0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23c-1.48 0-2.93-.39-4.19-1.15l-.3-.17l-3.12.82l.83-3.04l-.2-.32a8.2 8.2 0 0 1-1.26-4.38c.01-4.54 3.7-8.24 8.25-8.24M8.53 7.33c-.16 0-.43.06-.66.31c-.22.25-.87.86-.87 2.07c0 1.22.89 2.39 1 2.56c.14.17 1.76 2.67 4.25 3.73c.59.27 1.05.42 1.41.53c.59.19 1.13.16 1.56.1c.48-.07 1.46-.6 1.67-1.18s.21-1.07.15-1.18c-.07-.1-.23-.16-.48-.27c-.25-.14-1.47-.74-1.69-.82c-.23-.08-.37-.12-.56.12c-.16.25-.64.81-.78.97c-.15.17-.29.19-.53.07c-.26-.13-1.06-.39-2-1.23c-.74-.66-1.23-1.47-1.38-1.72c-.12-.24-.01-.39.11-.5c.11-.11.27-.29.37-.44c.13-.14.17-.25.25-.41c.08-.17.04-.31-.02-.43c-.06-.11-.56-1.35-.77-1.84c-.2-.48-.4-.42-.56-.43c-.14 0-.3-.01-.47-.01"/></svg>
+            <span>Empezar a Ahorrar</span>
+        </a>
+        <button class="hamburger-menu" id="hamburger-btn">
+            <span class="material-icons">menu</span>
+        </button>
+    </div>
+</header>
+
+<div class="mobile-nav" id="mobile-nav-container">
+    <button class="close-menu" id="close-menu-btn">
+        <span class="material-icons" style="font-size: 32px;">close</span>
+    </button>
+    <a href="#como-funciona">Cómo funciona</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#contacto">Contacto</a>
+    <a href="https://api.whatsapp.com/send?phone=34694256528&text=%2Fstart" class="style-4 primary-container on-primary-container-text top-margin-32">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width='1em' height='1em'><path fill="currentColor" d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91c0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23c-1.48 0-2.93-.39-4.19-1.15l-.3-.17l-3.12.82l.83-3.04l-.2-.32a8.2 8.2 0 0 1-1.26-4.38c.01-4.54 3.7-8.24 8.25-8.24M8.53 7.33c-.16 0-.43.06-.66.31c-.22.25-.87.86-.87 2.07c0 1.22.89 2.39 1 2.56c.14.17 1.76 2.67 4.25 3.73c.59.27 1.05.42 1.41.53c.59.19 1.13.16 1.56.1c.48-.07 1.46-.6 1.67-1.18s.21-1.07.15-1.18c-.07-.1-.23-.16-.48-.27c-.25-.14-1.47-.74-1.69-.82c-.23-.08-.37-.12-.56.12c-.16.25-.64.81-.78.97c-.15.17-.29.19-.53.07c-.26-.13-1.06-.39-2-1.23c-.74-.66-1.23-1.47-1.38-1.72c-.12-.24-.01-.39.11-.5c.11-.11.27-.29.37-.44c.13-.14.17-.25.25-.41c.08-.17.04-.31-.02-.43c-.06-.11-.56-1.35-.77-1.84c-.2-.48-.4-.42-.56-.43c-.14 0-.3-.01-.47-.01"/></svg>
+        <span>Empezar a Ahorrar</span>
+    </a>
+</div>
+
+
+<section id="section-index" class="landing-page on-background-text">
+  <div class="simple-container direction-column width-100 align-center">
+
+    <div class="simple-container direction-column width-100 max-width-600 align-center row-1">
+        
+<h1 class="main-title margin-0 text-center">La IA que te ayuda a <span style="background: linear-gradient(to right, #147FFD, #A491FB); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">ahorrar</span> gratis.</h1>        <div class="simple-container max-width-600 top-margin-16 bottom-margin-16">
+            <span class="title-text text-center">
+                Sube tus facturas de luz, móvil o internet. Auro las analiza y te consigue una oferta mejor. Simple, rápido y gratis.
+            </span>
+        </div>
+        <div class="simple-container top-margin-16 flex-wrap justify-center gap-8">
+            <button onclick="window.open(`https://api.whatsapp.com/send?phone=34694256528&text=%2Fstart`, '_blank', 'noopener,noreferrer')" class="style-4 primary-container on-primary-container-text">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width='1em' height='1em'><path fill="currentColor" d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91c0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23c-1.48 0-2.93-.39-4.19-1.15l-.3-.17l-3.12.82l.83-3.04l-.2-.32a8.2 8.2 0 0 1-1.26-4.38c.01-4.54 3.7-8.24 8.25-8.24M8.53 7.33c-.16 0-.43.06-.66.31c-.22.25-.87.86-.87 2.07c0 1.22.89 2.39 1 2.56c.14.17 1.76 2.67 4.25 3.73c.59.27 1.05.42 1.41.53c.59.19 1.13.16 1.56.1c.48-.07 1.46-.6 1.67-1.18s.21-1.07.15-1.18c-.07-.1-.23-.16-.48-.27c-.25-.14-1.47-.74-1.69-.82c-.23-.08-.37-.12-.56.12c-.16.25-.64.81-.78.97c-.15.17-.29.19-.53.07c-.26-.13-1.06-.39-2-1.23c-.74-.66-1.23-1.47-1.38-1.72c-.12-.24-.01-.39.11-.5c.11-.11.27-.29.37-.44c.13-.14.17-.25.25-.41c.08-.17.04-.31-.02-.43c-.06-.11-.56-1.35-.77-1.84c-.2-.48-.4-.42-.56-.43c-.14 0-.3-.01-.47-.01"/></svg>
+                <span>Empezar a Ahorrar</span>
+            </button>
+            <button class="style-4 outline-1 background on-background-text">
+                Cómo funciona
+            </button>
+        </div>
+    </div>
+    <div class="simple-container position-relative max-width-1200 top-margin-48 z-index-1 hero-image-container">
+        <img src="whatsapp_image.jpg"Auro AI Chat Interface" class="width-100 hero-image">
+    </div>
+
+    <div id="como-funciona" class="simple-container direction-column width-100 max-width-1200 align-center top-margin-64">
+        <div class="simple-container direction-column align-center gap-8 bottom-margin-32">
+            <div class="pildora"><span>Cómo funciona</span></div>
+            <h1 class="main-title margin-0 text-center">Ahorrar es tan simple como...</h1>
+            <span class="title-text text-center" style="max-width: 500px;">Tres pasos para pagar menos cada mes.</span>
+        </div>
+        <div class="valores-grid">        
+            <div class="grid-card direction-column align-center">
+                <md-icon class="large-icon">upload_file</md-icon>
+                <h3 class="title-medium text-center">1. Sube tu factura</h3>
+                <p class="body-large outline-text text-center">
+                    Haz una foto o sube el PDF. Da igual la compañía, Auro lo entiende todo. Es 100% seguro y confidencial.
+                </p>
+            </div>
+            <div class="grid-card direction-column align-center">
+                <md-icon class="large-icon">auto_awesome</md-icon>
+                <h3 class="title-medium text-center">2. Analizamos los detalles</h3>
+                <p class="body-large outline-text text-center">
+                    Nuestra IA procesa tu consumo, permanencia y la letra pequeña en segundos para encontrar el ahorro real.
+                </p>
+            </div>
+            <div class="grid-card direction-column align-center">
+                <md-icon class="large-icon">savings</md-icon>
+                <h3 class="title-medium text-center">3. Recibe tu oferta</h3>
+                <p class="body-large outline-text text-center">
+                    Te presentamos una oferta más barata. Si te gusta, nos encargamos del cambio por ti. Sin llamadas ni papeleo.
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <div id="servicios" class="simple-container direction-column width-100 max-width-1200 align-center top-margin-64">
+        <div class="simple-container direction-column align-center gap-8 bottom-margin-32">
+            <div class="pildora"><span>Servicios</span></div>
+            <h1 class="main-title margin-0 text-center">Un experto para cada factura</h1>
+            <span class="title-text text-center" style="max-width: 500px;">Optimizamos los gastos más comunes de tu hogar.</span>
+        </div>
+
+        <div class="menu-pill-container">
+            <button class="tab-button tab-button-pill style-4 active" data-tab="luz">
+                <span class="material-icons tab-icon">lightbulb</span>
+                <span class="tab-text">Luz</span>
+            </button>
+            <button class="tab-button tab-button-pill style-4" data-tab="internet">
+                <span class="material-icons tab-icon">phonelink</span>
+                <span class="tab-text">Móvil e Internet</span>
+            </button>
+            <button class="tab-button tab-button-pill style-4" data-tab="nomina">
+                <span class="material-icons tab-icon">account_balance</span>
+                <span class="tab-text">Cuentas Nómina</span>
+            </button>
+        </div>
+
+        <div class="simple-container direction-column width-100 top-margin-32">
+            <div id="tab-luz" class="tab-content active">
+                <div class="feature-content-container">
+                    <div class="feature-content-left grow-1">
+                        <img src="https://placehold.co/500x350/E0E0E0/666666?text=Factura+de+Luz" alt="Análisis de factura de luz" class="feature-image">
+                    </div>
+                    <div class="feature-content-right grow-1 direction-column">
+                        <h2 class="headline-medium">Tu factura de la luz, bajo control</h2>
+                        <p class="body-large outline-text top-margin-16">
+                            Auro analiza tus tramos horarios, potencia contratada y consumo para encontrar la tarifa que de verdad se ajusta a ti. Deja de pagar por una potencia que no necesitas o en las horas más caras.
+                        </p>
+                        <button onclick="window.open(`https://api.whatsapp.com/send?phone=34694256528&text=%2Fstart`, '_blank', 'noopener,noreferrer')" class="style-4 primary-container on-primary-container-text top-margin-32">Analizar factura de luz</button>
+                    </div>
+                </div>
+            </div>
+            <div id="tab-internet" class="tab-content">
+                <div class="feature-content-container">
+                    <div class="feature-content-left grow-1">
+                         <img src="https://placehold.co/500x350/E0E0E0/666666?text=Fibra+y+Móvil" alt="Análisis de factura de internet y móvil" class="feature-image">
+                    </div>
+                    <div class="feature-content-right grow-1 direction-column">
+                        <h2 class="headline-medium">¿Pagas lo justo por tu Fibra y Móvil?</h2>
+                        <p class="body-large outline-text top-margin-16">
+                            Comparamos gigas, velocidad de fibra y permanencias. Auro encuentra ofertas combinadas que a menudo las compañías no publicitan y te ahorran una suma importante al año.
+                        </p>
+                        <button onclick="window.open(`https://api.whatsapp.com/send?phone=34694256528&text=%2Fstart`, '_blank', 'noopener,noreferrer')" class="style-4 primary-container on-primary-container-text top-margin-32">Optimizar tarifa de internet</button>
+                    </div>
+                </div>
+            </div>
+            <div id="tab-nomina" class="tab-content">
+                <div class="feature-content-container">
+                    <div class="feature-content-left grow-1">
+                         <img src="https://placehold.co/500x350/E0E0E0/666666?text=Cuenta+Bancaria" alt="Análisis de cuenta nómina" class="feature-image">
+                    </div>
+                    <div class="feature-content-right grow-1 direction-column">
+                        <h2 class="headline-medium">Cero comisiones en tu cuenta</h2>
+                        <p class="body-large outline-text top-margin-16">
+                            Las comisiones de mantenimiento, tarjetas o transferencias suman. Sube un extracto de tu cuenta y Auro buscará bancos que te ofrezcan los mismos servicios, o mejores, totalmente gratis.
+                        </p>
+                        <button onclick="window.open(`https://api.whatsapp.com/send?phone=34694256528&text=%2Fstart`, '_blank', 'noopener,noreferrer')" class="style-4 primary-container on-primary-container-text top-margin-32">Buscar cuenta sin comisiones</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+      
+    <div class="simple-container direction-column width-100 max-width-1200 align-center top-margin-64 bottom-margin-64">
+       <div class="cta-section simple-container direction-column align-center gap-16 width-100">
+            <h1 class="main-title margin-0 text-center">Ahorrar nunca te costará nada</h1>
+            <span class="title-text text-center" style="max-width: 600px;">
+                Nuestro servicio es 100% gratuito para ti. Obtenemos una pequeña comisión de los proveedores solo si decides cambiar y ahorrar. Si no ahorras, no ganamos.
+            </span>
+            <button onclick="window.open(`https://api.whatsapp.com/send?phone=34694256528&text=%2Fstart`, '_blank', 'noopener,noreferrer')" class="style-4 outline-1 background on-background-text">
+                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width='1em' height='1em'><path fill="currentColor" d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91c0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23c-1.48 0-2.93-.39-4.19-1.15l-.3-.17l-3.12.82l.83-3.04l-.2-.32a8.2 8.2 0 0 1-1.26-4.38c.01-4.54 3.7-8.24 8.25-8.24M8.53 7.33c-.16 0-.43.06-.66.31c-.22.25-.87.86-.87 2.07c0 1.22.89 2.39 1 2.56c.14.17 1.76 2.67 4.25 3.73c.59.27 1.05.42 1.41.53c.59.19 1.13.16 1.56.1c.48-.07 1.46-.6 1.67-1.18s.21-1.07.15-1.18c-.07-.1-.23-.16-.48-.27c-.25-.14-1.47-.74-1.69-.82c-.23-.08-.37-.12-.56.12c-.16.25-.64.81-.78.97c-.15.17-.29.19-.53.07c-.26-.13-1.06-.39-2-1.23c-.74-.66-1.23-1.47-1.38-1.72c-.12-.24-.01-.39.11-.5c.11-.11.27-.29.37-.44c.13-.14.17-.25.25-.41c.08-.17.04-.31-.02-.43c-.06-.11-.56-1.35-.77-1.84c-.2-.48-.4-.42-.56-.43c-.14 0-.3-.01-.47-.01"/></svg>
+                <span>Empezar a Ahorrar Gratis</span>
+            </button>
+       </div>
+    </div>
+
+   
+  </div>
+  
+</section>
+
+ <div id="contacto" class="simple-container direction-column top-margin-64 width-100 justify-center align-center footer-section">
+        <div class="simple-container width-100 max-width-1200 flex-wrap gap-16 padding-24" style="box-sizing:border-box">
+            <div class="simple-container grow-1 basis-normal direction-column h-padding-16">
+                <div class="auro-logo bottom-margin-16" style="justify-content: flex-start;">
+                    <img class="auro-logo-icon" src="logo.svg" alt="Logo de Auro AI"></img> Auro AI
+                </div>
+                <p class="outline-text">Tu asistente de ahorro personal.</p>
+            </div>
+            <div class="simple-container grow-1 basis-normal direction-column">
+                <span class="title-medium" style="font-weight: 600; margin-left: 8px;">Contacto</span>
+                <button class="style-4 background on-background-text boton-footer" style="justify-content: flex-start;">
+                    <md-icon>mail</md-icon>
+                    <span>hola@aurobot.ai</span>
+                </button>
+            </div>
+            <div class="simple-container grow-1 basis-normal direction-column">
+                <span class="title-medium" style="font-weight: 600; margin-left: 8px;">Legal</span>
+                <button class="style-4 background on-background-text boton-footer" style="justify-content: flex-start;">
+                    <md-icon>policy</md-icon>
+                    <span>Política de privacidad</span>
+                </button>
+                <button class="style-4 background on-background-text boton-footer" style="justify-content: flex-start;">
+                    <md-icon>description</md-icon>
+                    <span>Términos de uso</span>
+                </button>
+            </div>
+        </div>
+        <div class="simple-container width-100 max-width-1200 padding-24 border-top-light">
+            <p class="outline-text" style="font-size: 14px;">© 2025 Auro AI. Todos los derechos reservados.</p>
+        </div>
+    </div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Lógica para las TABS de servicios
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tabId = button.dataset.tab;
+                
+                tabContents.forEach(content => content.classList.remove('active'));
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                
+                document.getElementById('tab-' + tabId).classList.add('active');
+                button.classList.add('active');
+            });
+        });
+
+        // Lógica para el menú móvil
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const closeMenuBtn = document.getElementById('close-menu-btn');
+        const mobileNavContainer = document.getElementById('mobile-nav-container');
+        const mobileNavLinks = mobileNavContainer.querySelectorAll('a');
+        const hamburgerIcon = hamburgerBtn.querySelector('.material-icons');
+
+        function toggleMenu() {
+            const isOpen = mobileNavContainer.classList.toggle('is-open');
+            document.body.classList.toggle('no-scroll', isOpen);
+            hamburgerIcon.textContent = isOpen ? 'close' : 'menu';
+        }
+
+        hamburgerBtn.addEventListener('click', toggleMenu);
+        closeMenuBtn.addEventListener('click', toggleMenu);
+
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', toggleMenu);
+        });
+    });
+</script>
+
+<a href="https://api.whatsapp.com/send?phone=34694256528&text=%2Fstart" class="whatsapp-fab" target="_blank">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width='1em' height='1em'><path fill="currentColor" d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91c0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23c-1.48 0-2.93-.39-4.19-1.15l-.3-.17l-3.12.82l.83-3.04l-.2-.32a8.2 8.2 0 0 1-1.26-4.38c.01-4.54 3.7-8.24 8.25-8.24M8.53 7.33c-.16 0-.43.06-.66.31c-.22.25-.87.86-.87 2.07c0 1.22.89 2.39 1 2.56c.14.17 1.76 2.67 4.25 3.73c.59.27 1.05.42 1.41.53c.59.19 1.13.16 1.56.1c.48-.07 1.46-.6 1.67-1.18s.21-1.07.15-1.18c-.07-.1-.23-.16-.48-.27c-.25-.14-1.47-.74-1.69-.82c-.23-.08-.37-.12-.56.12c-.16.25-.64.81-.78.97c-.15.17-.29.19-.53.07c-.26-.13-1.06-.39-2-1.23c-.74-.66-1.23-1.47-1.38-1.72c-.12-.24-.01-.39.11-.5c.11-.11.27-.29.37-.44c.13-.14.17-.25.25-.41c.08-.17.04-.31-.02-.43c-.06-.11-.56-1.35-.77-1.84c-.2-.48-.4-.42-.56-.43c-.14 0-.3-.01-.47-.01"/></svg>
+</a>
+
+</body>
+</html>
